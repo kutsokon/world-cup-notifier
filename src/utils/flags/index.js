@@ -1,9 +1,12 @@
 import emojiFlags from 'emoji-flags';
 
 import countriesMap from './countries-iso.constants';
-import { getKeyByValue } from '../utils';
 
-function getFlag(code) {
+export function getKeyByValue(object, value) {
+  return Object.keys(object).find(key => object[key] === value);
+}
+
+export function getFlag(code) {
   const countryCode = getKeyByValue(countriesMap, code);
 
   if (code === 'ENG') {

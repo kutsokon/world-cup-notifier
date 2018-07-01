@@ -1,17 +1,21 @@
-
 import Telegraf from 'telegraf';
 
-import { fetchTodayGames, startGamesPolling } from '../game';
+import { fetchTodayMatches } from '../match-notifier';
+import { startGoalPolling } from '../goal-notifier';
 
-const bot = new Telegraf('564562461:AAE1rR4veXt6NCg4KRxKytAnFnyEYBFnqNQ');
+const API_KEY = '';
+const bot = new Telegraf(API_KEY);
 
 bot.start((ctx) => {
-  ctx.reply('Welcome to World Cup 2018 Notifier! Type /help to get the full list of commands');
-  startGamesPolling(ctx);
+  ctx.reply('Welcome to World Cup 2018 Notifier! Every WC18 goals in your messanger!');
+  startGoalPolling(ctx);
 });
 bot.help(ctx => ctx.reply('Type /today to get today`s World Cup games'));
 bot.hears('/today', (ctx) => {
-  fetchTodayGames(ctx);
+  fetchTodayMatches(ctx);
+});
+bot.hears('/poll', (ctx) => {
+  startGoalPolling(ctx);
 });
 
 bot.startPolling();
